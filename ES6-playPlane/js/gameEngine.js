@@ -114,24 +114,24 @@ var gameEngine= {
 	crash: function(){
 		
 		this.timer= setInterval(function(){
-			for(let j=0; j<gameEngine.allEnemys.length; j++){ //遍历所有敌机对象
-				for(let i=0; i<gameEngine.allBullets.length; i++){  //遍历所有子弹对象
+			for(let i=0; i<gameEngine.allEnemys.length; i++){ //遍历所有敌机对象
+				for(let j=0; j<gameEngine.allBullets.length; j++){  //遍历所有子弹对象
 					
-					if( isCrash( gameEngine.allBullets[i].ele, gameEngine.allEnemys[j].ele) ){ //判断每个敌机节点和每个子弹节点是否有碰撞
+					if( isCrash( gameEngine.allEnemys[i].ele, gameEngine.allBullets[j].ele) ){ //判断每个敌机节点和每个子弹节点是否有碰撞
 //						console.log( isCrash( gameEngine.allBullets[i].ele, gameEngine.allEnemys[j].ele)) //ture
 						
 						//让子弹爆炸动画，并移除子弹节点
-						gameEngine.allBullets[i].boom();
-						gameEngine.allBullets.splice(i, 1);  //同步删除数组中第i个子弹对象
+						gameEngine.allBullets[j].boom();
+						gameEngine.allBullets.splice(j, 1);  //同步删除数组中第i个子弹对象
 						
 						//数组中第j个敌机受到一点伤害值，不需要在此移除敌机节点
-						gameEngine.allEnemys[j].hurt();
+						gameEngine.allEnemys[i].hurt();
 						
 					}
 				}
 			
 				//判断敌机和我的飞机是否发生碰撞
-				if( isCrash(gameEngine.allEnemys[j].ele, myPlane.ele) ){
+				if( isCrash(gameEngine.allEnemys[i].ele, myPlane.ele) ){
 					clearInterval(this.timer);  //清除碰撞检测
 					
 					myPlane.boom(function(){
@@ -143,10 +143,9 @@ var gameEngine= {
 							type: "post",
 							url: "http://60.205.181.47/myPHPCode4/uploadScore.php",
 							data: {name: myname, score: gameEngine.allScore},
-//								async: true,
 							
 							success: function(data){
-								alert("提交成功："+ data)
+//								alert("提交成功："+ data)
 								location.href= "paihangbang.html";
 								
 							},
@@ -158,6 +157,7 @@ var gameEngine= {
 						});
 						
 					});
+					
 					break;
 				}
 					
