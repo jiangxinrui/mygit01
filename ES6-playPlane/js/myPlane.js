@@ -25,13 +25,13 @@ var myPlane= {
 		myPlane.ele.onmousedown= function(e){
 			e= e||event;
 			e.preventDefault();
-			var disx= e.offsetX;
-			var disy= e.offsetY;
+			let disx= e.offsetX;
+			let disy= e.offsetY;
 			
 			document.onmousemove= function(e){
 				e= e||event;
-				var x= e.pageX - disx - gameEngine.ele.offsetLeft;
-				var y= e.pageY - disy - gameEngine.ele.offsetTop;
+				let x= e.pageX - disx - gameEngine.ele.offsetLeft;
+				let y= e.pageY - disy - gameEngine.ele.offsetTop;
 				if(x<0)x=0
 				else if(x > gameEngine.ele.offsetWidth-myPlane.ele.offsetWidth){
 					x = gameEngine.ele.offsetWidth-myPlane.ele.offsetWidth
@@ -51,8 +51,8 @@ var myPlane= {
 	//监听键盘
 	listenKeybord: function(){
 		
-		var xspeed = 0;
-		var yspeed = 0;
+		let xspeed = 0;
+		let yspeed = 0;
 		
 		onkeydown = function(e){
 			e = e||event;
@@ -83,7 +83,7 @@ var myPlane= {
 		}
 		
 		setInterval(function(){ //每隔30毫秒调用一次，按下键做到实时反馈、丝滑顺畅
-			var x = myPlane.ele.offsetLeft + xspeed;
+			let x = myPlane.ele.offsetLeft + xspeed;
 			if (x < 0) {x = 0}
 			else if (x > gameEngine.ele.offsetWidth-myPlane.ele.offsetWidth) { 
 				x = gameEngine.ele.offsetWidth-myPlane.ele.offsetWidth;
@@ -99,7 +99,7 @@ var myPlane= {
 	//调用子弹
 	fire: function(){
 		this.firebullet= setInterval(function(){
-			var bullet= new Bullet();
+			let bullet= new Bullet();
 			bullet.init().move();
 			
 		}, this.difficulty)  //子弹创建的速度
@@ -114,10 +114,10 @@ var myPlane= {
 		clearInterval(this.firebullet);  //停止发射子弹
 		
 		
-		var arr= ["images/me_die1.png", "images/me_die2.png", "images/me_die3.png", "images/me_die4.png"];
-		var i = 0;
-		var that= this;
-		var planedie= setInterval(function(){
+		let arr= ["images/me_die1.png", "images/me_die2.png", "images/me_die3.png", "images/me_die4.png"];
+		let i = 0;
+		let that= this;
+		let planedie= setInterval(function(){
 			if(i >= arr.length){
 				clearInterval(planedie);
 				gameEngine.ele.appendChild(that.ele);
