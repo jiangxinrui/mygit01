@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/play.css" />
+		
+		<script src="js/ajax.js"></script>
+		<script src="js/common.js"></script>
+		<script src="dest/js/gameEngine.js"></script>
+		<script src="dest/js/myPlane.js"></script>
+		<script src="dest/js/bullet.js"></script>
+		<script src="dest/js/enemy.js"></script>
+		<script>
+window.onload= function(){
+	
+	var ul= document.getElementById("ul");
+	var ali= document.getElementsByTagName("li");
+	
+	for(var i=0; i<ali.length; i++){
+		ali[i].onclick= function(){
+			ul.parentNode.removeChild(ul);
+			
+			//开始游戏
+			gameEngine.init().start();
+			
+			//触发子弹发射频率
+			myPlane.difficulty= this.value-0; //得到数字值
+			
+		}
+	}
+	
+	
+}
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<ul id="ul">
+				<li value="300">简单模式</li>
+				<li value="400">非常困难</li>
+				<li value="500">超级困难</li>
+				<li value="200">春哥附体</li>
+			</ul>
+		</div>
+	</body>
+</html>
